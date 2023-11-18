@@ -1,0 +1,27 @@
+{
+    "Run": {
+        "verb": true,
+        "v2": "Ran",
+        "v3": "Run"
+    },
+    "Fly": {
+        "verb": true,
+        "v2": "Flew",
+        "v3": "Flown"
+    },
+    "Swim": {
+        "verb": true,
+        "v2": "Swam",
+        "v3": "Swum"
+    },
+    "Drink": {
+        "verb": true,
+        "v2": "Drank",
+        "v3": "Drunk"
+    },
+    "Write": {
+        "verb": true,
+        "v2": "Wrote",
+        "v3": "Written"
+    }
+}
