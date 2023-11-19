@@ -1,27 +1,62 @@
 {
-    "Run": {
-        "verb": true,
-        "v2": "Ran",
-        "v3": "Run"
+    "Activist": {
+        "noun": true,
+        "adjective": "active",
+        "adverb": "actively",
+        "verb": {
+            "V1": "activate",
+            "V2": "activated",
+            "V3": "activated"
+        }
     },
-    "Fly": {
-        "verb": true,
-        "v2": "Flew",
-        "v3": "Flown"
+    "Beauty": {
+        "noun": true,
+        "adjective": "beautiful",
+        "adverb": "beautifully",
+        "verb": {
+            "V1": "beautify",
+            "V2": "beautify",
+            "V3": "beautified"
+        }
     },
-    "Swim": {
-        "verb": true,
-        "v2": "Swam",
-        "v3": "Swum"
+    "Choice": {
+        "noun": true,
+        "adjective": "choosy",
+        "adverb": null,
+        "verb": {
+            "V1": "choose",
+            "V2": "chose",
+            "V3": "chosen"
+        }
     },
-    "Drink": {
-        "verb": true,
-        "v2": "Drank",
-        "v3": "Drunk"
+    "Connection": {
+        "noun": true,
+        "adjective": "connected",
+        "adverb": "connectedly",
+        "verb": {
+            "V1": "connect",
+            "V2": "connected",
+            "V3": "connected"
+        }
     },
-    "Write": {
-        "verb": true,
-        "v2": "Wrote",
-        "v3": "Written"
+    "Description": {
+        "noun": true,
+        "adjective": "descriptive",
+        "adverb": "descriptively",
+        "verb": {
+            "V1": "describe",
+            "V2": "described",
+            "V3": "described"
+        }
+    },
+    "Development": {
+        "noun": true,
+        "adjective": "developed / developing",
+        "adverb": null,
+        "verb": {
+            "V1": "develop",
+            "V2": "developed",
+            "V3": "developed"
+        }
     }
 }

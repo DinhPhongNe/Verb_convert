@@ -1,13 +1,13 @@
 import json
 from tabulate import tabulate as tbl
 
-# -- thêm dictonary.json
+# -- Hàm tải từ điển
 def load_dictionary():
     with open('dictionary.json') as file:
         data = json.load(file)
         return data
 
-# -- lấy verb ( động từ ) ra
+# -- Hàm lấy danh sách động từ
 def get_verb_list(dictionary):
     verbs = []
     for word in dictionary:
@@ -15,72 +15,125 @@ def get_verb_list(dictionary):
             verbs.append(word)
     return verbs
 
-# -- chọn verb ( động từ )
-def select_verb_forms(verb, choice, dictionary):
+# -- Hàm chọn hình thức từ
+def select_word_forms(word, choice, dictionary, saved_words):
     forms = []
     if choice == 1:
-        forms.append((verb, "v1"))
+        forms.append((word, "Noun"))
     elif choice == 2:
-        forms.append((dictionary[verb]['v2'], "v2"))
+        adjective = dictionary[word].get('adjective')
+        if adjective:
+            forms.append((adjective, "Adjective"))
+        else:
+            print("Không có dạng tính từ cho từ '{}'.".format(word))
     elif choice == 3:
-        forms.append((dictionary[verb]['v3'], "v3"))
+        adverb = dictionary[word].get('adverb')
+        if adverb:
+            forms.append((adverb, "Adverb"))
+        else:
+            print("Không có dạng trạng từ cho từ '{}'.".format(word))
+    elif choice == 4:
+        verb = dictionary[word].get('verb')
+        if verb:
+            forms.append((verb.get('V1', ''), "V1"))
+            forms.append((verb.get('V2', ''), "V2"))
+            forms.append((verb.get('V3', ''), "V3"))
+        else:
+            print("Không có dạng động từ cho từ '{}'.".format(word))
+    elif choice == 5:
+        if word in dictionary:
+            forms.append((word, "Noun"))
+            adjective = dictionary[word].get('adjective')
+            if adjective:
+                forms.append((adjective, "Adjective"))
+            adverb = dictionary[word].get('adverb')
+            if adverb:
+                forms.append((adverb, "Adverb"))
+            verb = dictionary[word].get('verb')
+            if verb:
+                forms.append((verb.get('V1', ''), "V1"))
+                forms.append((verb.get('V2', ''), "V2"))
+                forms.append((verb.get('V3', ''), "V3"))
+        else:
+            print("Từ '{}' không tồn tại trong từ điển.".format(word))
+    elif choice == 6:
+        if word in dictionary:
+            forms.append((word, "Noun"))
+            adjective = dictionary[word].get('adjective')
+            if adjective:
+                forms.append((adjective, "Adjective"))
+            adverb = dictionary[word].get('adverb')
+            if adverb:
+                forms.append((adverb, "Adverb"))
+            verb = dictionary[word].get('verb')
+            if verb:
+                forms.append((verb.get('V1', ''), "V1"))
+                forms.append((verb.get('V2', ''), "V2"))
+                forms.append((verb.get('V3', ''), "V3"))
+        else:
+            print("Từ '{}' không tồn tại trong từ điển.".format(word))
+        save_choice = input("Bạn có muốn lưu từ này vào danh sách? (y/n): ")
+        if save_choice == 'y':
+            saved_words.append((word,) + tuple(form[0] for form in forms[1:]))
     else:
-        forms.append((verb, "v1"))
-        forms.append((dictionary[verb]['v2'], "v2"))
-        forms.append((dictionary[verb]['v3'], "v3"))
+        print("Lựa chọn không hợp lệ.")
+
     return forms
 
-# -- hiển thị từ ra ( sử dụng thư viện tabulate )
-def display_verb_forms(forms):
-    headers = ["V1", "V2", "V3"]
-    data = [[forms[0][0], forms[1][0], forms[2][0]]]
+# -- Hàm hiển thị các dạng từ
+def display_word_forms(forms):
+    headers = ["Word", "Form"]
+    data = [(form[0], form[1]) for form in forms]
 
     table = tbl(data, headers=headers, tablefmt="fancy_grid")
     print(table)
 
-def display_saved_verbs(saved_verbs):
-    if saved_verbs:
+# -- Hàm hiển thị danh sách từ đã lưu
+def display_saved_words(saved_words):
+    if saved_words:
         print("Danh sách các từ đã lưu:")
-        headers = ["V1", "V2", "V3"]
-        data = [(verb[0], verb[1], verb[2]) for verb in saved_verbs]
+        headers = ["Word", "Noun", "Adjective", "Adverb", "V1", "V2", "V3"]
+        data = saved_words
 
         table = tbl(data, headers=headers, tablefmt="fancy_grid")
         print(table)
     else:
         print("Không có từ nào được lưu.")
 
-# -- code chính
+# -- Hàm chính
 def main():
     dictionary = load_dictionary()
     verbs = get_verb_list(dictionary)
-    saved_verbs = []
+    saved_words = []
 
     while True:
         word = input("Nhập từ tiếng Anh (nhập 'q' để thoát): ")
         if word == 'q':
             break
 
-        if word in verbs:
-            print("----------------------=======Nhập lựa chọn của bạn=======----------------------")
-            print("Từ '{}' được tìm thấy trong từ điển.".format(word))
-            print("Chọn hình thức động từ:")
-            print("1. V1 (nguyên thể)")
-            print("2. V2 (quá khứ đơn)")
-            print("3. V3 (quá khứ phân từ)")
-            print("4. Tất cả")
-            print("----------------------===================================----------------------")
-            choice = int(input("Lựa chọn của bạn: "))
+        print("----------------------=======Nhập lựa chọn của bạn=======----------------------")
+        print("Từ '{}' được tìm thấy trong từ điển.".format(word))
+        print("Chọn hình thức từ:")
+        print("1. Danh từ")
+        print("2. Tính từ") 
+        print("3. Trạng từ")
+        print("4. Động từ (V1, V2, V3)")
+        print("5. Xem tất cả hình thức từ")
+        print("6. Xem chi tiết và lựa chọn hình thức cần lưu")
+        print("----------------------===================================----------------------")
+        choice = int(input("Lựa chọn của bạn: "))
 
-            forms = select_verb_forms(word, choice, dictionary)
-            display_verb_forms(forms)
+        forms = select_word_forms(word, choice, dictionary, saved_words)
+        display_word_forms(forms)
 
-            save_choice = input("Bạn có muốn lưu từ này vào danh sách? (y/n): ")
-            if save_choice == 'y':
-                saved_verbs.append((word, forms[1][0], forms[2][0]))
-        else:
-            print("Từ '{}' không tồn tại trong từ điển.".format(word))
+        if choice == 5:
+            continue
 
-    display_saved_verbs(saved_verbs)
+        save_choice = input("Bạn có muốn lưu từ này vào danh sách? (y/n): ")
+        if save_choice == 'y':
+            saved_words.append((word,) + tuple(form[0] for form in forms[1:]))
+
+    display_saved_words(saved_words)
 
 
 if __name__ == '__main__':
