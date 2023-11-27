@@ -112,7 +112,7 @@ def main():
             break
 
         print("----------------------=======Nhập lựa chọn của bạn=======----------------------")
-        print("Từ '{}' được tìm thấy trong từ điển.".format(word))
+        print(f"Từ '{word}' được tìm thấy trong từ điển.")
         print("Chọn hình thức từ:")
         print("1. Danh từ")
         print("2. Tính từ") 
